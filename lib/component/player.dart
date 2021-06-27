@@ -32,7 +32,7 @@ class Player {
       isDead = true;
       if(controller.score > (controller.highScoreValue))
         controller.storage.setInt("highScore", controller.score);
-      controller.init();
+      controller.lost();
     }
   }
 
