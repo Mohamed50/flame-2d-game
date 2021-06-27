@@ -1,1 +1,5 @@
-enum GameState{Menu, Playing}
+enum GameState {
+  Menu,
+  Playing,
+  Lost,
+}

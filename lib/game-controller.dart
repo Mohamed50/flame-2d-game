@@ -4,14 +4,13 @@ import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_game/component/enemy-spawner.dart';
-import 'package:flutter_game/component/enemy.dart';
 import 'package:flutter_game/component/flies/house-fly.dart';
 import 'package:flutter_game/component/health-bar.dart';
 import 'package:flutter_game/component/high-score.dart';
 import 'package:flutter_game/component/player.dart';
 import 'package:flutter_game/component/score.dart';
-import 'package:flutter_game/component/start-button.dart';
 import 'package:flutter_game/state/game-state.dart';
+import 'package:flutter_game/views/home-view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'component/background.dart';
@@ -34,9 +33,9 @@ class GameController extends Game{
   EnemySpawner enemySpawner;
   Score scoreText;
   HighScore highScore;
-  StartButton startButton;
   int score;
   int highScoreValue;
+  HomeView homeView;
 
   GameController(){
     init();
@@ -46,10 +45,10 @@ class GameController extends Game{
     gameState = GameState.Menu;
     random = Random();
     resize(await Flame.util.initialDimensions());
+    homeView = HomeView(this);
     background = Background(this);
     player = Player(this);
     highScore = HighScore(this);
-    startButton = StartButton(this);
     enemies = <Fly>[];
     healthBar = HealthBar(this);
     enemySpawner = EnemySpawner(this);
@@ -66,8 +65,8 @@ class GameController extends Game{
     background.render(canvas);
     player.render(canvas);
     if(gameState == GameState.Menu){
+      homeView.render(canvas);
       highScore.render(canvas);
-      startButton.render(canvas);
     }
     else {
       enemies.forEach((enemy) => enemy.render(canvas));
@@ -80,7 +79,6 @@ class GameController extends Game{
   void update(double t) {
     if(gameState == GameState.Menu) {
       highScore.update(t);
-      startButton.update(t);
     }
     else {
       enemies.forEach((enemy) => enemy.update(t));
@@ -98,7 +96,7 @@ class GameController extends Game{
 
   void onTapDown(TapDownDetails details){
     if(gameState == GameState.Menu)
-      gameState = GameState.Playing;
+      homeView.onTapDown(details);
     else {
       enemies.forEach((enemy) {
         if (enemy.flyRect.contains(details.globalPosition))
