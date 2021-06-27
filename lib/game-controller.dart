@@ -19,6 +19,7 @@ import 'component/flies/drooler-fly.dart';
 import 'component/flies/hungry-fly.dart';
 import 'component/flies/macho-fly.dart';
 import 'component/fly.dart';
+import 'views/lost-view.dart';
 
 class GameController extends Game{
   Random random;
@@ -36,6 +37,7 @@ class GameController extends Game{
   int score;
   int highScoreValue;
   HomeView homeView;
+  LostView lostView;
 
   GameController(){
     init();
@@ -46,7 +48,13 @@ class GameController extends Game{
     random = Random();
     resize(await Flame.util.initialDimensions());
     homeView = HomeView(this);
+    lostView = LostView(this);
     background = Background(this);
+    storage = await SharedPreferences.getInstance();
+    initPlaying();
+  }
+
+  initPlaying(){
     player = Player(this);
     highScore = HighScore(this);
     enemies = <Fly>[];
@@ -54,8 +62,12 @@ class GameController extends Game{
     enemySpawner = EnemySpawner(this);
     score = 0;
     scoreText = Score(this);
-    storage = await SharedPreferences.getInstance();
     highScoreValue = storage.getInt("highScore") ?? 0;
+  }
+
+  lost(){
+    gameState = GameState.Lost;
+    initPlaying();
   }
   
   
@@ -67,6 +79,9 @@ class GameController extends Game{
     if(gameState == GameState.Menu){
       homeView.render(canvas);
       highScore.render(canvas);
+    }
+    else if (gameState == GameState.Lost){
+      lostView.render(canvas);
     }
     else {
       enemies.forEach((enemy) => enemy.render(canvas));
@@ -97,6 +112,8 @@ class GameController extends Game{
   void onTapDown(TapDownDetails details){
     if(gameState == GameState.Menu)
       homeView.onTapDown(details);
+    if(gameState == GameState.Lost)
+      lostView.onTapDown(details);
     else {
       enemies.forEach((enemy) {
         if (enemy.flyRect.contains(details.globalPosition))
