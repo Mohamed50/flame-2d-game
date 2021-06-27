@@ -14,7 +14,7 @@ class StartButton {
   StartButton(this.controller){
     double width = controller.tileSize * 6;
     double height = controller.tileSize * 3;
-    startRect = Rect.fromLTWH(controller.screenSize.width / 2 - width / 2, controller.screenSize.height * 0.8, width, height);
+    startRect = Rect.fromLTWH(controller.screenSize.width / 2 - width / 2, controller.screenSize.height * 0.7, width, height);
     startSprite = Sprite('ui/start-button.png');  }
 
 
