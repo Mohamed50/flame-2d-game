@@ -7,12 +7,26 @@ class HighScore {
   TextPainter painter;
   Offset position;
   int highScoreValue;
+  TextStyle _textStyle;
 
   HighScore(this.controller) {
     painter = TextPainter(
       textAlign: TextAlign.center,
       textDirection: TextDirection.ltr,
     );
+
+    _textStyle = TextStyle(
+      color: Color(0xffffffff),
+      fontSize: 48,
+      shadows: <Shadow>[
+        Shadow(
+          blurRadius: 7,
+          color: Color(0xff000000),
+          offset: Offset(3, 3),
+        ),
+      ],
+    );
+
     position = Offset.zero;
   }
 
@@ -25,10 +39,7 @@ class HighScore {
     if ((painter.text ?? '') != highScoreValue.toString()) {
       painter.text = TextSpan(
           text: "High Score: $highScoreValue",
-          style: TextStyle(
-            fontSize: 48,
-            color: Colors.black,
-          ));
+          style: _textStyle);
       painter.layout();
       position = Offset(
         (controller.screenSize.width / 2) - (painter.width / 2),

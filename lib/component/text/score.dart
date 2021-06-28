@@ -6,12 +6,26 @@ class Score {
   final GameController controller;
   TextPainter painter;
   Offset position;
+  TextStyle _textStyle;
 
   Score(this.controller) {
     painter = TextPainter(
       textAlign: TextAlign.center,
       textDirection: TextDirection.ltr,
     );
+
+    _textStyle = TextStyle(
+      color: Color(0xffffffff),
+      fontSize: 90,
+      shadows: <Shadow>[
+        Shadow(
+          blurRadius: 7,
+          color: Color(0xff000000),
+          offset: Offset(3, 3),
+        ),
+      ],
+    );
+
     position = Offset.zero;
   }
 
@@ -22,11 +36,9 @@ class Score {
   void update(double t) {
     if ((painter.text ?? '') != controller.playingView.score.toString()) {
       painter.text = TextSpan(
-          text: controller.playingView.score.toString(),
-          style: TextStyle(
-            fontSize: 70,
-            color: Colors.black,
-          ));
+        text: controller.playingView.score.toString(),
+        style: _textStyle,
+      );
       painter.layout();
       position = Offset(
         (controller.screenSize.width / 2) - (painter.width / 2),
