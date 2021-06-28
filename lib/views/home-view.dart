@@ -1,9 +1,9 @@
 import 'dart:ui';
 import 'package:flame/sprite.dart';
 import 'package:flutter/gestures.dart';
-import 'package:flutter_game/component/credit-button.dart';
-import 'package:flutter_game/component/help-button.dart';
-import 'package:flutter_game/component/start-button.dart';
+import 'package:flutter_game/component/buttons/credit-button.dart';
+import 'package:flutter_game/component/buttons/help-button.dart';
+import 'package:flutter_game/component/buttons/start-button.dart';
 import 'package:flutter_game/game-controller.dart';
 
 class HomeView {

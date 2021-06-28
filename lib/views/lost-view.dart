@@ -1,7 +1,8 @@
 import 'dart:ui';
 import 'package:flame/sprite.dart';
-import 'package:flutter/src/gestures/tap.dart';
-import 'package:flutter_game/component/start-button.dart';
+import 'package:flutter/gestures.dart';
+import 'package:flutter_game/component/text/high-score.dart';
+import 'package:flutter_game/component/buttons/start-button.dart';
 import 'package:flutter_game/game-controller.dart';
 
 class LostView {
@@ -10,10 +11,17 @@ class LostView {
   Rect lostRect;
   Sprite lostSprite;
   StartButton startButton;
+  HighScore highScore;
 
   LostView(this.controller){
+    initializeHighScore();
     initializeTitle();
     initializeStart();
+  }
+
+
+  initializeHighScore(){
+    highScore = HighScore(controller);
   }
 
   initializeTitle(){
@@ -28,8 +36,13 @@ class LostView {
   }
 
   void render(Canvas canvas){
+    highScore.render(canvas);
     lostSprite.renderRect(canvas, lostRect);
     startButton.render(canvas);
+  }
+
+  void update(double t){
+    highScore.update(t);
   }
 
   void onTapDown(TapDownDetails details) {

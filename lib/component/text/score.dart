@@ -2,12 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_game/game-controller.dart';
 
-class HighScore {
+class Score {
   final GameController controller;
   TextPainter painter;
   Offset position;
 
-  HighScore(this.controller) {
+  Score(this.controller) {
     painter = TextPainter(
       textAlign: TextAlign.center,
       textDirection: TextDirection.ltr,
@@ -20,11 +20,11 @@ class HighScore {
   }
 
   void update(double t) {
-    if ((painter.text ?? '') != controller.highScoreValue.toString()) {
+    if ((painter.text ?? '') != controller.playingView.score.toString()) {
       painter.text = TextSpan(
-          text: "High Score: ${controller.highScoreValue}",
+          text: controller.playingView.score.toString(),
           style: TextStyle(
-            fontSize: 48,
+            fontSize: 70,
             color: Colors.black,
           ));
       painter.layout();

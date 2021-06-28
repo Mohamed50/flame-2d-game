@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flame/sprite.dart';
 import 'package:flutter_game/game-controller.dart';
 
-import '../fly.dart';
+import 'fly.dart';
 
 
 class AgileFly extends Fly {

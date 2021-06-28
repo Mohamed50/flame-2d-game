@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flame/sprite.dart';
-import 'package:flutter_game/component/fly.dart';
+import 'package:flutter_game/component/flies/fly.dart';
 import 'package:flutter_game/game-controller.dart';
 
 class HungryFly extends Fly{

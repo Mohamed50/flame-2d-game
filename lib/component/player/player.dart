@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_game/data/pref-manager.dart';
 import 'package:flutter_game/game-controller.dart';
 
 class Player {
@@ -27,13 +28,18 @@ class Player {
   }
 
   Future<void> update(double t) async {
-    print(currentHealth);
     if(!isDead && currentHealth <= 0){
       isDead = true;
-      if(controller.score > (controller.highScoreValue))
-        controller.storage.setInt("highScore", controller.score);
+      handleHighScore();
       controller.lost();
     }
+  }
+
+
+  handleHighScore(){
+    int highScoreValue = PrefManger.getInstance().getHighScore() ?? 0;
+    if(controller.playingView.score > (highScoreValue))
+      PrefManger.getInstance().setHighScore(controller.playingView.score);
   }
 
 }

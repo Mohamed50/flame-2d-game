@@ -70,7 +70,7 @@ class Fly {
 
   void hit() {
     isDead = true;
-    controller.score++;
+    controller.playingView.score++;
   }
 
 }

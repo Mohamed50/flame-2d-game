@@ -1,13 +1,14 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_game/data/pref-manager.dart';
 import 'package:flutter_game/game-controller.dart';
 
-class Score {
+class HighScore {
   final GameController controller;
   TextPainter painter;
   Offset position;
+  int highScoreValue;
 
-  Score(this.controller) {
+  HighScore(this.controller) {
     painter = TextPainter(
       textAlign: TextAlign.center,
       textDirection: TextDirection.ltr,
@@ -20,11 +21,12 @@ class Score {
   }
 
   void update(double t) {
-    if ((painter.text ?? '') != controller.score.toString()) {
+    highScoreValue = PrefManger.getInstance().getHighScore() ?? 0;
+    if ((painter.text ?? '') != highScoreValue.toString()) {
       painter.text = TextSpan(
-          text: controller.score.toString(),
+          text: "High Score: $highScoreValue",
           style: TextStyle(
-            fontSize: 70,
+            fontSize: 48,
             color: Colors.black,
           ));
       painter.layout();
@@ -34,4 +36,5 @@ class Score {
       );
     }
   }
+
 }

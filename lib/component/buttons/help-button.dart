@@ -25,7 +25,7 @@ class HelpButton {
 
   void onTapDown(TapDownDetails details){
     if(helpRect.contains(details.globalPosition))
-      controller.gameState = GameState.Playing;
+      controller.gameState = GameState.Help;
   }
 
 }

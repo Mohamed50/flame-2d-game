@@ -14,19 +14,14 @@ class EnemySpawner {
   }
 
   void init(){
-    killAllEnemies();
     currentInterval = maxSpawnInterval;
     nextSpawn = DateTime.now().millisecondsSinceEpoch + currentInterval;
   }
 
-  void killAllEnemies(){
-    controller.enemies.forEach((element) => element.isDead = true);
-  }
-
   update(t){
     int now = DateTime.now().millisecondsSinceEpoch;
-    if(controller.enemies.length < maxEnemies && now >= nextSpawn){
-      controller.spawnEnemy();
+    if(controller.playingView.enemies.length < maxEnemies && now >= nextSpawn){
+      controller.playingView.spawnEnemy();
       if(currentInterval > minSpawnInterval){
         currentInterval -= intervalChange;
         currentInterval -= (currentInterval * 0.1).toInt();
