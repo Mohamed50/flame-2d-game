@@ -3,4 +3,5 @@ enum GameState {
   Playing,
   Lost,
   Help,
+  Credit
 }

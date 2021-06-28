@@ -25,7 +25,7 @@ class CreditsButton {
 
   void onTapDown(TapDownDetails details){
     if(creditRect.contains(details.globalPosition))
-      controller.gameState = GameState.Playing;
+      controller.gameState = GameState.Credit;
   }
 
 }

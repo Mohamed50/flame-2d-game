@@ -4,6 +4,7 @@ import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_game/component/player/player.dart';
 import 'package:flutter_game/state/game-state.dart';
+import 'package:flutter_game/views/credit-view.dart';
 import 'package:flutter_game/views/help-view.dart';
 import 'package:flutter_game/views/home-view.dart';
 import 'package:flutter_game/views/playing-view.dart';
@@ -21,6 +22,7 @@ class GameController extends Game {
   PlayingView playingView;
   LostView lostView;
   HelpView helpView;
+  CreditView creditView;
 
   GameController() {
     init();
@@ -32,6 +34,7 @@ class GameController extends Game {
     homeView = HomeView(this);
     lostView = LostView(this);
     helpView = HelpView(this);
+    creditView = CreditView(this);
     background = Background(this);
     initPlaying();
   }
@@ -57,6 +60,9 @@ class GameController extends Game {
       case GameState.Help:
         helpView.render(canvas);
         break;
+      case GameState.Credit:
+        creditView.render(canvas);
+        break;
       case GameState.Lost:
         lostView.render(canvas);
         break;
@@ -72,6 +78,8 @@ class GameController extends Game {
       case GameState.Menu:
         break;
       case GameState.Help:
+        break;
+      case GameState.Credit:
         break;
       case GameState.Lost:
         lostView.update(t);
@@ -95,6 +103,9 @@ class GameController extends Game {
         break;
       case GameState.Help:
         helpView.onTapDown(details);
+        break;
+      case GameState.Credit:
+        creditView.onTapDown(details);
         break;
       case GameState.Lost:
         lostView.onTapDown(details);
