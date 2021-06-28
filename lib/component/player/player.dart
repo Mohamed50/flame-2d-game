@@ -1,4 +1,6 @@
+import 'dart:math';
 import 'dart:ui';
+import 'package:flame/flame.dart';
 import 'package:flame/sprite.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_game/data/pref-manager.dart';
@@ -31,6 +33,7 @@ class Player {
   Future<void> update(double t) async {
     if(!isDead && currentHealth <= 0){
       isDead = true;
+      Flame.audio.play('sfx/haha' + (Random().nextInt(5) + 1).toString() + '.ogg');
       handleHighScore();
       controller.lost();
     }

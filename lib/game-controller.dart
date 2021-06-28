@@ -8,7 +8,6 @@ import 'package:flutter_game/views/credit-view.dart';
 import 'package:flutter_game/views/help-view.dart';
 import 'package:flutter_game/views/home-view.dart';
 import 'package:flutter_game/views/playing-view.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'component/background.dart';
 import 'views/lost-view.dart';
 
@@ -36,6 +35,7 @@ class GameController extends Game {
     helpView = HelpView(this);
     creditView = CreditView(this);
     background = Background(this);
+    Flame.audio.loopLongAudio('bg/bg.mp3', volume: 0.25);
     initPlaying();
   }
 

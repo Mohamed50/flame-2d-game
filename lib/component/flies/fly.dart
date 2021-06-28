@@ -1,5 +1,7 @@
+import 'dart:math';
 import 'dart:ui';
 
+import 'package:flame/flame.dart';
 import 'package:flame/sprite.dart';
 import 'package:flutter_game/game-controller.dart';
 
@@ -70,6 +72,7 @@ class Fly {
 
   void hit() {
     isDead = true;
+    Flame.audio.play('sfx/ouch' + (Random().nextInt(11) + 1).toString() + '.ogg');
     controller.playingView.score++;
   }
 
